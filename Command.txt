@@ -1,0 +1,74 @@
+#may be necessary
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
+
+#To run
+$ roslaunch vehicle_description vehicle_gazebo.launch
+
+# View odometry data
+$ rostopic echo /odom
+
+# Visualize sensor data
+$ rosrun rqt_plot rqt_plot /odom/pose/pose/position/x:y
+
+# Check controller status
+$ rosservice call /controller_manager/list_controllers
+
+# Visualize in RViz
+$ rosrun rviz rviz
+
+#Using Teleop Keyboard
+$ rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/cmd_vel
+
+"U    I    O       J    K    L       M    ,    .
+ Q    W    E       A    S    D       Z    X    C
+
+I=Forward ,=Backward
+J=Left    L=Right
+U=Left+Forward   O=Right+Forward
+M=Left+Backward .=Right+Backward
+Space/K=Stop"
+
+
+# Launch with custom spawn position and world
+$ roslaunch vehicle_description vehicle_gazebo.launch \
+    spawn_position:="-x 2.0 -y 1.0 -z 0.1 -Y 1.57" \
+    world_name:="worlds/willowgarage.world"
+
+# Set constant velocity:
+$ rosservice call /set_velocity "linear: 0.5 angular: 0.2"
+
+# Emergency stop:
+$ rosservice call /emergency_stop "{}"
+
+# Quick Testing
+# Move forward at 0.5 m/s
+$ rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.5
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0" -r 10
+
+# Rotate counter-clockwise at 1 rad/s
+$ rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 1.0" -r 10
+
+# Stop the robot
+$ rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0" -1
