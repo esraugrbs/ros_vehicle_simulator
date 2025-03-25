@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world_name" default="worlds/empty.world"/>
+  <arg name="spawn_position" default="-x 0 -y 0 -z 0.1 -R 0 -P 0 -Y 0"/>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <param name="robot_description" 
+         command="$(find xacro)/xacro '$(find vehicle_description)/urdf/body.xacro'"/>
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model my_vehicle -param robot_description $(arg spawn_position)"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+  
+  <rosparam command="load" file="$(find vehicle_description)/config/controllers.yaml"/>
+  
+</launch>

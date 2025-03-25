@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Properties -->
+  <xacro:property name="wheel_radius" value="0.1"/>
+  <xacro:property name="wheel_width" value="0.05"/>
+  <xacro:property name="support_wheel_radius" value="0.029"/>
+
+  <!-- Main Wheel Macro -->
+  <xacro:macro name="main_wheel" params="side parent xyz rpy">
+    <link name="${side}_wheel">
+      <inertial>
+        <mass value="0.5"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      </inertial>
+      
+      <visual>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      
+      <collision>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+      
+      <gazebo reference="${side}_wheel">
+        <material>Gazebo/Black</material>
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
+      </gazebo>
+    </link>
+
+    <joint name="${side}_wheel_joint" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${side}_wheel"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Support Wheel Macro -->
+  <xacro:macro name="support_wheel" params="name parent xyz">
+    <link name="${name}_support_wheel">
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+      
+      <visual>
+        <geometry>
+          <sphere radius="${support_wheel_radius}"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+      
+      <collision>
+        <geometry>
+          <sphere radius="${support_wheel_radius}"/>
+        </geometry>
+      </collision>
+      
+      <gazebo reference="${name}_support_wheel">
+        <material>Gazebo/Gray</material>
+        <mu1 value="0.5"/>
+        <mu2 value="0.5"/>
+      </gazebo>
+    </link>
+
+    <joint name="${name}_support_joint" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${name}_support_wheel"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+      <axis xyz="1 1 1"/> <!-- Omnidirectional movement -->
+    </joint>
+  </xacro:macro>
+</robot>

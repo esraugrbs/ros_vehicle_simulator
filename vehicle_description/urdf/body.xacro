@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_vehicle">
+
+  <xacro:include filename="$(find vehicle_description)/urdf/base.xacro"/>
+  <xacro:include filename="$(find vehicle_description)/urdf/wheels.xacro"/>
+  <xacro:include filename="$(find vehicle_description)/urdf/differential.xacro"/>
+  <xacro:property name="pi" value="3.1415926535897931"/>
+  <xacro:include filename="$(find vehicle_description)/urdf/lidar.xacro"/>
+
+  <!-- Base Link -->
+  <xacro:base_link/>
+
+  <!-- Wheels -->
+  <xacro:main_wheel side="left" parent="base_link" xyz="0 0.337 -0.164" rpy="${pi/2} 0 0"/>
+  <xacro:main_wheel side="right" parent="base_link" xyz="0 -0.337 -0.164" rpy="${pi/2} 0 0"/>
+
+  <!-- Support Wheels -->
+  <xacro:support_wheel name="front_left" parent="base_link" xyz="0.35 0.21 -0.232"/>
+  <xacro:support_wheel name="front_right" parent="base_link" xyz="0.35 -0.21 -0.232"/>
+  <xacro:support_wheel name="rear_left" parent="base_link" xyz="-0.35 0.21 -0.232"/>
+  <xacro:support_wheel name="rear_right" parent="base_link" xyz="-0.35 -0.21 -0.232"/>
+
+  <!-- Control Systems -->
+  <xacro:differential_drive/>
+  <xacro:lidar_sensor name="hokuyo" parent="base_link" xyz="0.3 0 0.2" rpy="0 0 0"/>
+</robot>
