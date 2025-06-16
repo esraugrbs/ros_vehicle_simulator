@@ -1,9 +1,15 @@
+# Controller Manager Configuration
 controller_manager:
   ros:
     # Publish all joint states
     joint_state_controller:
       type: joint_state_controller/JointStateController
       publish_rate: 50
+
+# Joint State Controller
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
 
 # Wheel Velocity Controllers
 left_wheel_controller:
@@ -18,7 +24,7 @@ right_wheel_controller:
   pid: {p: 200.0, i: 50.0, d: 2.0, i_clamp_min: -1000.0, i_clamp_max: 1000.0}
   publish_rate: 50
 
-# Optional: Support Wheel Controllers (for drunk wheels)
+# Optional: Support Wheel Controllers (for support wheels)
 support_wheels_controller:
   type: effort_controllers/JointPositionController
   joints:

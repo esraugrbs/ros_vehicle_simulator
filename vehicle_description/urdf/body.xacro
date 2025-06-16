@@ -4,9 +4,9 @@
   <xacro:include filename="$(find vehicle_description)/urdf/base.xacro"/>
   <xacro:include filename="$(find vehicle_description)/urdf/wheels.xacro"/>
   <xacro:include filename="$(find vehicle_description)/urdf/differential.xacro"/>
-  <xacro:property name="pi" value="3.1415926535897931"/>
   <xacro:include filename="$(find vehicle_description)/urdf/lidar.xacro"/>
-
+  <xacro:property name="pi" value="3.1415926535897931" scope="global"/>
+  
   <!-- Base Link -->
   <xacro:base_link/>
 
@@ -22,5 +22,11 @@
 
   <!-- Control Systems -->
   <xacro:differential_drive/>
-  <xacro:lidar_sensor name="hokuyo" parent="base_link" xyz="0.3 0 0.2" rpy="0 0 0"/>
+  
+  <!-- IMPORTANT: Add the transmissions -->
+  <xacro:wheel_transmissions/>
+  
+  <!-- LiDAR Sensor -->
+  <xacro:lidar_sensor name="hokuyo" parent="base_link" xyz="0.3 0 0.4" rpy="0 0 0"/>
+  
 </robot>

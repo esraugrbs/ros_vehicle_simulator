@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch RViz with mapping configuration -->
+  <node name="rviz" pkg="rviz" type="rviz" 
+        args="-d $(find vehicle_description)/config/mapping.rviz" 
+        output="screen"/>
+</launch>
