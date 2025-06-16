@@ -3,8 +3,11 @@ cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
 
-#To run
+#To run(1. Terminal)
 $ roslaunch vehicle_description vehicle_gazebo.launch
+
+#To run with rviz ( 2. Terminal)
+$ roslaunch vehicle_description mapping_rviz.launch
 
 # View odometry data
 $ rostopic echo /odom
