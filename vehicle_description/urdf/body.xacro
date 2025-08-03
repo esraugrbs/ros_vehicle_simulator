@@ -5,28 +5,28 @@
   <xacro:include filename="$(find vehicle_description)/urdf/wheels.xacro"/>
   <xacro:include filename="$(find vehicle_description)/urdf/differential.xacro"/>
   <xacro:include filename="$(find vehicle_description)/urdf/lidar.xacro"/>
+
+  <!-- Global constant -->
   <xacro:property name="pi" value="3.1415926535897931" scope="global"/>
-  
+
   <!-- Base Link -->
   <xacro:base_link/>
 
-  <!-- Wheels -->
-  <xacro:main_wheel side="left" parent="base_link" xyz="0 0.337 -0.164" rpy="${pi/2} 0 0"/>
-  <xacro:main_wheel side="right" parent="base_link" xyz="0 -0.337 -0.164" rpy="${pi/2} 0 0"/>
+  <!-- =====================  Drive Wheels  ===================== -->
+  <!-- Lateral offset ~0.22 m, vertical -0.10 m puts wheel tangent just below chassis -->
+  <xacro:main_wheel side="left"  parent="base_link" xyz="0  0.22 -0.10" rpy="${pi/2} 0 0"/>
+  <xacro:main_wheel side="right" parent="base_link" xyz="0 -0.22 -0.10" rpy="${pi/2} 0 0"/>
 
-  <!-- Support Wheels -->
-  <xacro:support_wheel name="front_left" parent="base_link" xyz="0.35 0.21 -0.232"/>
-  <xacro:support_wheel name="front_right" parent="base_link" xyz="0.35 -0.21 -0.232"/>
-  <xacro:support_wheel name="rear_left" parent="base_link" xyz="-0.35 0.21 -0.232"/>
-  <xacro:support_wheel name="rear_right" parent="base_link" xyz="-0.35 -0.21 -0.232"/>
+  <!-- =====================  Support Wheels  ===================== -->
+  <!-- front / rear offset 0.25 m, lateral 0.15 m, vertical -0.13 m -->
+  <xacro:support_wheel name="front_left"  parent="base_link" xyz=" 0.25  0.15 -0.13"/>
+  <xacro:support_wheel name="front_right" parent="base_link" xyz=" 0.25 -0.15 -0.13"/>
+  <xacro:support_wheel name="rear_left"   parent="base_link" xyz="-0.25  0.15 -0.13"/>
+  <xacro:support_wheel name="rear_right"  parent="base_link" xyz="-0.25 -0.15 -0.13"/>
 
-  <!-- Control Systems -->
+  <!-- =====================  Control & Sensors  ===================== -->
   <xacro:differential_drive/>
-  
-  <!-- IMPORTANT: Add the transmissions -->
   <xacro:wheel_transmissions/>
-  
-  <!-- LiDAR Sensor -->
-  <xacro:lidar_sensor name="hokuyo" parent="base_link" xyz="0.3 0 0.4" rpy="0 0 0"/>
-  
+  <xacro:lidar_sensor name="hokuyo" parent="base_link" xyz="0.23 0 0.30" rpy="0 0 0"/>
+
 </robot>

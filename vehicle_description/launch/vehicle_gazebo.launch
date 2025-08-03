@@ -33,9 +33,10 @@
   <rosparam command="load" file="$(find vehicle_description)/config/controllers.yaml"/>
   
   <!-- Controller Spawner -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
-        args="joint_state_controller left_wheel_controller right_wheel_controller"/>
-        
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+      args="joint_state_controller"
+      output="screen"/>
+
   <!-- Static transform for map->odom (since we're using gmapping) -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="map_odom_broadcaster" 
         args="0 0 0 0 0 0 map odom"/>

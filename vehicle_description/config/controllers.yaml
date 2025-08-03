@@ -11,18 +11,6 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 
-# Wheel Velocity Controllers
-left_wheel_controller:
-  type: velocity_controllers/JointVelocityController
-  joint: left_wheel_joint
-  pid: {p: 200.0, i: 50.0, d: 2.0, i_clamp_min: -1000.0, i_clamp_max: 1000.0}
-  publish_rate: 50
-
-right_wheel_controller:
-  type: velocity_controllers/JointVelocityController
-  joint: right_wheel_joint
-  pid: {p: 200.0, i: 50.0, d: 2.0, i_clamp_min: -1000.0, i_clamp_max: 1000.0}
-  publish_rate: 50
 
 # Optional: Support Wheel Controllers (for support wheels)
 support_wheels_controller:
