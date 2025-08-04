@@ -29,14 +29,21 @@ By validating SLAM and navigation in simulation first, you can iterate quickly b
 | Gazebo   | **9** |
 | Catkin deps | `roscpp`, `gazebo_ros`, `gazebo_ros_control`, `controller_manager`, `joint_state_controller`, `velocity_controllers`, `xacro` |
 
+### RViz – Live SLAM Map
+![RViz SLAM](docs/img/Png2.png)
+
+### Gazebo – Vehicle in Test World
+![Gazebo World](docs/img/Png1.png)
+
+
 ## Build & Launch
 ```bash
 # Clone into your catkin workspace
 cd ~/catkin_ws/src
-git clone https://github.com/<your-org>/vehicle_sim.git
+git clone https://github.com/esraugrbs/ros_vehicle_simulator
 cd ..
 catkin_make            # or catkin build
-source devel/setup.bash
+source devel/setup.bash  #Remember to reuse it every time you run it.
 
 # 1. Spawn the robot
 roslaunch vehicle_description vehicle_gazebo.launch
