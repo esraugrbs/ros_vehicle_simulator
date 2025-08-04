@@ -30,10 +30,10 @@ By validating SLAM and navigation in simulation first, you can iterate quickly b
 | Catkin deps | `roscpp`, `gazebo_ros`, `gazebo_ros_control`, `controller_manager`, `joint_state_controller`, `velocity_controllers`, `xacro` |
 
 ### RViz – Live SLAM Map
-![RViz SLAM](docs/img/Png2.png)
+![RViz SLAM](Png2.png)
 
 ### Gazebo – Vehicle in Test World
-![Gazebo World](docs/img/Png1.png)
+![Gazebo World](Png1.png)
 
 
 ## Build & Launch
